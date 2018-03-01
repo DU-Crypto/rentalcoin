@@ -12,7 +12,7 @@ class Token():
     owner = b'\xaf\x12\xa8h{\x14\x94\x8b\xc4\xa0\x08\x12\x8aU\nci[\xc1\xa5'
 
     def getTotalSupply(self):
-        return storage.get(self.circulation_key
+        return storage.get(self.circulation_key)
 
     def addToTotalSupply(self,amount:int, storage:StorageAPI):
         current_supply = storage.get(self.circulation_key);
