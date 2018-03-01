@@ -5,9 +5,11 @@ class Token():
     symbol = 'RNC'
     total_supply = 10000000
     decimals = 8
+    storage = new StorageAPI()
+    circulation_key = 'in_supply'
 
     def getTotalSupply(self):
-        return self.total_supply
+        return storage.get(self.circulation_key)
 
     def getName(self):
         return self.name
@@ -17,4 +19,31 @@ class Token():
 
     def getDecimals(self):
         return self.decimals
-        
+
+    def getBalanceOf(args):
+        account = args[0]
+        return Storage.get(account)
+    def transfer(args):
+        from_account = args[0]
+        to_account = args[1]
+        amount = args[2]
+
+        #check to see if the amount is less than or equal to zero
+        if amount <= 0:
+            print("Amount must be greater than zero")
+            return False
+
+        from_balance = storage.get(from_account)
+
+        if from_balance < amount:
+            print("Insufficient Funds!")
+            return False
+        to_balance = storage.get(to_account)
+
+        new_from_balance = from_balance - amount
+        new_to_balance = to_balance + amount
+
+        storage.put(to_account,new_to_balance)
+        storage.put(from_balance,new_from_balance)
+        print("Transfer Complete")
+        return True
