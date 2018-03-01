@@ -20,3 +20,15 @@ def Main(op,args):
 		return token.getBalanceOf(args)
 	elif op == 'decimals'
 		return token.getDecimals()
+
+def deploy(token:Token):
+	if not CheckWitness(token.owner):
+		print("You must be the owner to deploy")
+		return False
+
+	storage = StorageAPI()
+
+	if not storage.get("init"):
+		storage.put("init",1)
+		storage.put(token.owner,token.initial_amount)
+		token.addToTotalSupply(token.initial_amount,storage)
