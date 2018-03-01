@@ -6,10 +6,16 @@ class Token():
     total_supply = 10000000
     decimals = 8
     storage = new StorageAPI()
-    circulation_key = 'in_supply'
+    circulation_key = b'in_supply'
 
     def getTotalSupply(self):
-        return storage.get(self.circulation_key)
+        return storage.get(self.circulation_key
+
+    def addToTotalSupply(self,amount:int, storage:StorageAPI):
+        current_supply = storage.get(self.circulation_key);
+        current_supply += amount
+        storage.put(self.circulation_key,current_supply)
+        
 
     def getName(self):
         return self.name
