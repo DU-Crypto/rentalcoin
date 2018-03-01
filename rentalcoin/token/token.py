@@ -7,6 +7,9 @@ class Token():
     decimals = 8
     storage = new StorageAPI()
     circulation_key = b'in_supply'
+    # This is the script hash of the address for the owner of the token
+    # This can be found in ``neo-python`` with the walet open, use ``wallet`` command
+    owner = b'\xaf\x12\xa8h{\x14\x94\x8b\xc4\xa0\x08\x12\x8aU\nci[\xc1\xa5'
 
     def getTotalSupply(self):
         return storage.get(self.circulation_key
@@ -15,7 +18,7 @@ class Token():
         current_supply = storage.get(self.circulation_key);
         current_supply += amount
         storage.put(self.circulation_key,current_supply)
-        
+
 
     def getName(self):
         return self.name
